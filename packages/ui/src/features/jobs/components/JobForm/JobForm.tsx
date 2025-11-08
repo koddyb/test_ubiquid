@@ -1,26 +1,34 @@
-import type { FC } from "react";
+import {type FC, useEffect} from "react";
 import { useState } from "react";
 import styles from "./JobForm.module.css";
 
-interface JobFormProps {
-  onSubmit: ({
-    title,
-    category,
-    salary,
-    type,
-  }: {
+export type JobFormData = {
     title: string;
     category: string;
     salary: string;
     type: string;
-  }) => void;
 }
 
-const JobForm: FC<JobFormProps> = ({ onSubmit }) => {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("sales");
-  const [salary, setSalary] = useState("");
-  const [type, setType] = useState("cdi");
+interface JobFormProps {
+  onSubmit: (data: JobFormData) => void;
+  initialData?: Partial<JobFormData>;
+  buttonLabel?: string;
+}
+
+const JobForm: FC<JobFormProps> = ({onSubmit, initialData, buttonLabel = "Enregistrer", }) => {
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [category, setCategory] = useState(initialData?.category || "sales");
+  const [salary, setSalary] =  useState(initialData?.salary || "");
+  const [type, setType] = useState(initialData?.type || "cdi");
+
+    useEffect(() => {
+        if(initialData) {
+            setTitle(initialData.title || "");
+            setCategory(initialData.category || "sales");
+            setSalary(initialData.salary || "");
+            setType(initialData.type || "cdi");
+        }
+    }, [initialData]);
 
   const handleSubmit = () => {
     onSubmit({ title, category, salary, type });
@@ -72,7 +80,7 @@ const JobForm: FC<JobFormProps> = ({ onSubmit }) => {
       {/* Buttons */}
       <div className={styles.buttons}>
         <div className={styles.button} onClick={() => handleSubmit()}>
-          Enregistrer
+            {buttonLabel}
         </div>
       </div>
     </div>

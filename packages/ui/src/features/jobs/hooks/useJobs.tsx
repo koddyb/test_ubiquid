@@ -14,7 +14,7 @@ export interface Job {
   createdAt: string;
 }
 
-// Types pour les filtres de recherche
+// iltres de recherche
 export interface SearchFilters {
   searchTerm: string;
   category: JobCategory | "all";
@@ -28,21 +28,18 @@ export const useJobs = () => {
   const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);//en attente
   const [error, setError] = useState<string | null>(null);
-  
-  // États pour le tri
+
   const [sortBy, setSortBy] = useState<SortByT>("title");
   const [sortOrder, setSortOrder] = useState<SortOrderT>("asc");
-  
-  // États pour les filtres de recherche
+
   const [filters, setFilters] = useState<SearchFilters>({
     searchTerm: "",
     category: "all",
     jobType: "all"
   });
 
-  // Récupération des données au chargement du composant
   useEffect(() => {
-    const fetchJobs = async () => {
+    const getJobs = async () => {
       try {
         const response = await fetch(URL, {
           headers: { "authorization": "ubiquid" }
@@ -60,8 +57,8 @@ export const useJobs = () => {
         setIsLoading(false);
       }
     };
-    fetchJobs();
-    //fetchJobs().then(r => console.log(r));
+    getJobs();
+    //getJobs().then(r => console.log(r));
   }, []);
 
   // je met à jour les filtres

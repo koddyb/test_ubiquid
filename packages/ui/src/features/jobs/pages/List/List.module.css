@@ -1,21 +1,52 @@
 .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
+h1 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
 .error {
-  border: 2px solid red;
+  background-color: #fee2e2;
+  color: #b91c1c;
   padding: 1rem;
-  color: red;
-  font-weight: 500;
-  border-radius: 8px;
+  border-radius: 0.5rem;
+  border-left: 4px solid #dc2626;
+  margin: 1rem 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #3b82f6;
+  font-size: 1.1rem;
 }
 
 .noResults {
-  border: 2px solid var(--color-black);
-  padding: 1rem;
-  border-radius: 8px;
-  font-weight: 500;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  padding: 2rem;
+  border-radius: 0.5rem;
   text-align: center;
+  font-size: 1.1rem;
+  border: 1px dashed #d1d5db;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+  }
 }
